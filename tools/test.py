@@ -131,8 +131,10 @@ def repeat_eval_ckpt(model, test_loader, args, eval_output_dir, logger, ckpt_dir
         logger.info('Epoch %s has been evaluated' % cur_epoch_id)
 
 
-def main():
+def main(data_path):
     args, cfg = parse_config()
+    cfg.DATA_CONFIG.DATA_PATH=data_path
+    print(cfg.DATA_CONFIG.DATA_PATH)
     if args.launcher == 'none':
         dist_test = False
         total_gpus = 1
@@ -196,4 +198,27 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    for dp in [
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_inf_1',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_inf_2',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_inf_3',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_inf_4',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_inf_5',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L1_1',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L1_2',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L1_3',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L1_4',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L1_5',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L2_1',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L2_2',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L2_3',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L2_4',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L2_5',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L25_1',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L25_2',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L25_3',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L25_4',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti_L25_5',
+               '/mrtstorage/users/jinwei/semanticvoxelsplus/data/kitti',
+               ]:
+        main(dp)
